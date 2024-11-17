@@ -1,0 +1,14 @@
+1. Map
+
+const amountColor = [
+    [13, 'white'], 
+    [25, 'red'], 
+    [38, 'cyan'], 
+    [50, 'yellow'], 
+    [38, 'blue'], 
+    [25, 'green'], 
+    [13, 'magenta']
+];
+
+Get color with greatest amount:
+Math.max(...amountColor.map(ac => ac[0]));
