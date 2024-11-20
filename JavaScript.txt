@@ -12,3 +12,33 @@ const amountColor = [
 
 Get color with greatest amount:
 Math.max(...amountColor.map(ac => ac[0]));
+
+2. Two promise + resolve:
+
+handleFirePressed() {
+    console.log('FIRE !');
+
+    const currentRoom = this.getCurrentRoom();
+    currentRoom.writeUpperInfo("You picked garlic");
+
+    new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, 1000);
+    }).then(() => {
+        let inventoryInfo = "Inventory: ";
+        this.player.inventory.forEach(item => {
+            inventoryInfo += (item.name + " ");
+        });
+        console.log(inventoryInfo);
+        currentRoom.writeUpperInfo(inventoryInfo);
+
+        return new Promise((resolve2) => {
+            setTimeout(() => {
+                resolve2();
+            }, 1000);
+        });
+    }).then(() => {
+        currentRoom.writeRoomInfo();
+    });
+}
