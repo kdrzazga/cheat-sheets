@@ -42,3 +42,16 @@ handleFirePressed() {
         currentRoom.writeRoomInfo();
     });
 }
+
+3.Remove item of given class
+
+this.inventory = [new Vodka(), new Garlic(), new Garlic()];
+
+for (let i = 0; i < this.inventory.length; i++) {
+    if (this.inventory[i] instanceof Garlic) {
+        // Remove the item at index `i`
+        this.inventory.splice(i, 1);
+        console.log("Removed one Garlic instance from inventory.");
+        break;
+    }
+}
