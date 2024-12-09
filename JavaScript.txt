@@ -12,3 +12,90 @@ const amountColor = [
 
 Get color with greatest amount:
 Math.max(...amountColor.map(ac => ac[0]));
+
+2. Two promise + resolve:
+
+handleFirePressed() {
+    console.log('FIRE !');
+
+    const currentRoom = this.getCurrentRoom();
+    currentRoom.writeUpperInfo("You picked garlic");
+
+    new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, 1000);
+    }).then(() => {
+        let inventoryInfo = "Inventory: ";
+        this.player.inventory.forEach(item => {
+            inventoryInfo += (item.name + " ");
+        });
+        console.log(inventoryInfo);
+        currentRoom.writeUpperInfo(inventoryInfo);
+
+        return new Promise((resolve2) => {
+            setTimeout(() => {
+                resolve2();
+            }, 1000);
+        });
+    }).then(() => {
+        currentRoom.writeRoomInfo();
+    });
+}
+
+3.Remove item of given class
+
+this.inventory = [new Vodka(), new Garlic(), new Garlic()];
+
+for (let i = 0; i < this.inventory.length; i++) {
+    if (this.inventory[i] instanceof Garlic) {
+        // Remove the item at index `i`
+        this.inventory.splice(i, 1);
+        console.log("Removed one Garlic instance from inventory.");
+        break;
+    }
+}
+
+OR
+
+const indexToRemove = this.inventory.findIndex(item => item instanceof Garlic);
+
+if (indexToRemove !== -1) {
+    this.inventory = this.inventory.filter((item, index) => index !== indexToRemove);
+    console.log("Removed the first Garlic instance from inventory.");
+} else {
+    console.log("No Garlic instance found in inventory.");
+}
+
+4. Using Array.of
+       this.floors = Array.from({ length: floorCount }, () => new Floor());
+is eqivalent to
+      for (let i = 0; i < floorCount; i++) {
+           const floor = new Floor();
+           this.floors.push(floor);
+       }
+
+5.  Initialization using map     
+
+  this.wires = this.floors.map((floor, i) => {
+           const aboveFloor = this.floors[i] || null;
+           const belowFloor = this.floors[i - 1] || null;
+           return new Wire(i, physics, belowFloor, aboveFloor);
+       });
+
+       for (let w = 0; w <= floorCount; w++) {
+            const aboveFloor = this.floors[w] || null;
+            const belowFloor = this.floors[w - 1] || null;
+            const wire = new Wire(physics, belowFloor, aboveFloor);
+            this.wires.push(wire);
+       }
+
+6. ENUMs
+
+const WireSlot = Object.freeze({
+    EMPTY: {imageId: '', shift: 0},
+    WIRE_STRAIGHT: {imageId: 'wire-section', shift: 0},
+    WIRE_UP: {imageId: 'wire-section-up', shift: 100},
+    WIRE_DOWN: {imageId: 'wire-section-down', shift: -50.5},
+});
+

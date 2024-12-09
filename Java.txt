@@ -1,0 +1,32 @@
+1. Equivalent of point 3 in JavaScript
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+class Garlic {
+}
+
+class Inventory {
+    private ArrayList<Object> inventory;
+
+    public Inventory() {
+        inventory = new ArrayList<>();
+    }
+
+    public void removeFirstGarlic() {
+        Iterator<Object> iterator = inventory.iterator();
+        while (iterator.hasNext()) {
+            Object item = iterator.next();
+            if (item instanceof Garlic) {
+                iterator.remove();
+                System.out.println("Removed the first Garlic instance from inventory.");
+                return;
+            }
+        }
+        System.out.println("No Garlic instance found in inventory.");
+    }
+
+    public void addItem(Object item) {
+        inventory.add(item);
+    }
+}
