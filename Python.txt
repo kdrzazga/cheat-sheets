@@ -1,1 +1,19 @@
 #
+
+1. Equvalent of point 3 in JavaScript
+class Garlic:
+    pass
+
+class Inventory:
+    def __init__(self):
+        self.inventory = []
+
+    def remove_first_garlic(self):
+        for i in range(len(self.inventory)):
+            if isinstance(self.inventory[i], Garlic):
+                del self.inventory[i]
+                print("Removed the first Garlic instance from inventory.")
+                return
+
+        print("No Garlic instance found in inventory.")
+
