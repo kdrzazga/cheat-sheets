@@ -15,3 +15,9 @@ class Inventory:
 
         print("No Garlic instance found in inventory.")
 
+2. Sorting
+fruits = ['apple', 'fig', 'banana']
+fruits.sort(key=len, reverse=True)
+
+#sort by number of occurences of 'a' letter
+sorted_by_a_amount = sorted(fruits, key=lambda x:x.count('a'))
